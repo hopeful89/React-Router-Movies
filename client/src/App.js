@@ -26,7 +26,7 @@ const App = () => {
 
 
   const addToSavedList = movie => {
-    setSavedList([...savedList, movie]);
+      setSavedList([...savedList, movie]);
   };
 
 
@@ -34,17 +34,15 @@ const App = () => {
   return (
     <Router>
       <div>
-        <SavedList list={savedList} />
+        <SavedList list={savedList} setSavedList={setSavedList}/>
         <Switch>
-        <Route path='/movies/:id' component={Movie}/>
+        <Route path='/movies/:id'><Movie savedList={savedList} addToSavedList={addToSavedList} /></Route> 
         <Route path='/'>
           <MovieList movies={movieList}/>
         </Route>
         </Switch>
       </div>
     </Router>
-
-
   );
 };
 

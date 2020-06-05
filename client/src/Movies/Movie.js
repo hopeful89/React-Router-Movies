@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom'
 
 const Movie = (props) => {
   const [movie, setMovie] = useState();
-  console.log('state movie', movie)
-  console.log('from movie', useParams())
+  // console.log('state movie', movie)
+  // console.log('from movie', useParams())
   const newId = useParams().id;
 
   useEffect(() => {
@@ -27,7 +27,12 @@ const Movie = (props) => {
   // Uncomment this only when you have moved on to the stretch goals
   const saveMovie = () => {
     const addToSavedList = props.addToSavedList;
-    addToSavedList(movie)
+    if(!props.savedList.includes(movie)){
+      console.log(props.savedList)
+      addToSavedList(movie)
+    }else{
+      console.log(props.savedList)
+    }
   }
 
   if (!movie) {
@@ -37,7 +42,7 @@ const Movie = (props) => {
   const { title, director, metascore, stars } = movie;
   return (
     <div className="save-wrapper">
-      <div className="movie-card">
+      <div className="movieCard">
         <h2>{title}</h2>
         <div className="movie-director">
           Director: <em>{director}</em>
@@ -53,7 +58,7 @@ const Movie = (props) => {
           </div>
         ))}
       </div>
-      <div className="save-button">Save</div>
+      <div onClick={() => {saveMovie()}}className="save-button">Save</div>
     </div>
   );
 }
